@@ -53,3 +53,16 @@ Summary
     2.90 ± 0.71 times faster than bun run src/bun-puppeteer.ts https://www.peterbe.com  > puppeteer.html
     5.04 ± 0.71 times faster than ./obscura fetch https://www.peterbe.com --dump html > obscura.html
 ```
+
+### Benchmark with dump omitted
+
+```sh
+hyperfine --warmup 6 "bun run src/bun-webview.ts https://www.peterbe.com > webview.html" "bun run src/bun-puppeteer.ts https://www.peterbe.com  > puppeteer.html" "./obscura fetch https://www.peterbe.com --dump original > obscura-original.html"
+```
+
+```text
+Summary
+  ./obscura fetch https://www.peterbe.com --dump original > obscura-original.html ran
+    2.81 ± 0.27 times faster than bun run src/bun-puppeteer.ts https://www.peterbe.com  > puppeteer.html
+    3.35 ± 0.92 times faster than bun run src/bun-webview.ts https://www.peterbe.com > webview.html
+```
