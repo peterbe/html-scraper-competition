@@ -66,3 +66,22 @@ Summary
     2.81 ± 0.27 times faster than bun run src/bun-puppeteer.ts https://www.peterbe.com  > puppeteer.html
     3.35 ± 0.92 times faster than bun run src/bun-webview.ts https://www.peterbe.com > webview.html
 ```
+
+## Measuring peak memory usage
+
+Tested like this on macos:
+
+```sh
+➜  html-scraper-competition git:(main) /usr/bin/time -l  bun run src/bun-webview.ts https://www.peterbe.com > webview.html
+        0.57 real         0.01 user         0.01 sys
+            17711104  maximum resident set size
+```
+
+Run a bunch of times, median collected:
+
+- `bun run src/bun-webview.ts https://www.peterbe.com`: 17216.00 KB
+- `bun run src/bun-puppeteer.ts https://www.peterbe.com`: 192656.00 KB
+- `./obscura fetch https://www.peterbe.com --dump original`: 10320.00 KB
+
+`obscura` uses 40% less than Bun WebView.
+`obscura` uses 95% less than Puppeteer.
